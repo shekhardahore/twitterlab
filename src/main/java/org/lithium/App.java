@@ -1,19 +1,37 @@
 package org.lithium;
-import twitter4j.*;
+import io.dropwizard.Application;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
 
-import java.util.List;
-
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args ) throws  TwitterException
-    {
-        TwitterOne twitterOne = new TwitterOne();
-        twitterOne.publishTweet("This is a test.");
-        TwitterTwo twitterPull = new TwitterTwo();
-        twitterPull.getTimeline();
+public class App extends Application<TwitterConfiguration> {
+    public static void main(String[] args) throws Exception {
+        new App().run(args);
     }
+
+
+    @Override
+    public String getName() {
+        return "hello-world";
+    }
+
+    @Override
+    public void initialize(Bootstrap<TwitterConfiguration> bootstrap) {
+        // nothing to do yet
+    }
+
+    @Override
+    public void run(TwitterConfiguration configuration,
+                    Environment environment) {
+        // nothing to do yet
+        final TwitterLabResource resource = new TwitterLabResource(
+                configuration.getTemplate(),
+                configuration.getDefaultName()
+        );
+        environment.jersey().register(resource);
+        final TemplateHealthCheck healthCheck =
+                new TemplateHealthCheck(configuration.getTemplate());
+        environment.healthChecks().register("template", healthCheck);
+        environment.jersey().register(resource);
+    }
+
 }
