@@ -6,32 +6,34 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 import java.util.UUID;
 
-@Path("/publishTweet")
-public class TwitterPublishResource {
 
-    public  TwitterPublishResource() {
+@Path("/timeline")
+@Produces(MediaType.APPLICATION_JSON)
+public class TwitterTimelineResource {
+    public  TwitterTimelineResource() {
 
     }
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
     @Timed
-    public Response tweetMessage(Tweet tweet) {
+    public Response getTimeline() {
         Response result = new Response();
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
 
         Twitter twitter = TwitterFactory.getSingleton();
         try {
-            Status status = twitter.updateStatus(tweet.getMessage());
-            result.setMessage("Successfully updated the status to [" + status.getText() + "].");
+            List<Status> statuses = twitter.getHomeTimeline();
+            System.out.println("Showing home timeline.");
+            for (Status status : statuses) {
+                System.out.println(status.getUser().getName() + ":" +
+                        status.getText());
+            }
+            result.setMessage("Successfully updated the status.");
             result.setSuccess(Boolean.TRUE);
         } catch (TwitterException e) {
             result.setMessage(e.getMessage());
