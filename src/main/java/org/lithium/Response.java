@@ -1,15 +1,24 @@
 package org.lithium;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import twitter4j.Status;
+
+import java.util.List;
 
 public class Response {
     private String guid;
     private Boolean success;
     private String message;
+    private List<Status> tweets;
 
     public Response() {
 
     }
+
+    @JsonProperty
+    public  List<Status> getTweets() { return tweets; }
+
+    public void  setTweets(List<Status> tweets) { this.tweets = tweets; }
 
     @JsonProperty
     public String getGuid() {

@@ -28,12 +28,7 @@ public class TwitterTimelineResource {
         Twitter twitter = TwitterFactory.getSingleton();
         try {
             List<Status> statuses = twitter.getHomeTimeline();
-            System.out.println("Showing home timeline.");
-            for (Status status : statuses) {
-                System.out.println(status.getUser().getName() + ":" +
-                        status.getText());
-            }
-            result.setMessage("Successfully updated the status.");
+            result.setTweets(statuses);
             result.setSuccess(Boolean.TRUE);
         } catch (TwitterException e) {
             result.setMessage(e.getMessage());
