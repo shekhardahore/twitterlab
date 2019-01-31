@@ -4,29 +4,59 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class TwitterConfiguration extends Configuration {
-    @NotEmpty
-    private String template;
-
-    @NotEmpty
-    private String defaultName = "Stranger";
+    private Boolean debug;
+    private String consumerKey;
+    private String consumerSecret;
+    private String accessToken;
+    private String accessTokenSecret;
 
     @JsonProperty
-    public String getTemplate() {
-        return template;
+    public Boolean getDebug() {
+        return debug;
     }
 
     @JsonProperty
-    public void setTemplate(String template) {
-        this.template = template;
+    public void setDebug(Boolean debug) {
+        this.debug = debug;
     }
 
     @JsonProperty
-    public String getDefaultName() {
-        return defaultName;
+    public String getConsumerKey() {
+        return consumerKey;
     }
 
     @JsonProperty
-    public void setDefaultName(String name) {
-        this.defaultName = name;
+    public void setConsumerKey(String consumerKey) {
+        this.consumerKey = consumerKey;
+    }
+
+    @JsonProperty
+    public String getConsumerSecret() {
+        return consumerSecret;
+    }
+
+    @JsonProperty
+    public void setConsumerSecret(String consumerSecret) {
+        this.consumerSecret = consumerSecret;
+    }
+
+    @JsonProperty
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    @JsonProperty
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    @JsonProperty
+    public String getAccessTokenSecret() {
+        return accessTokenSecret;
+    }
+
+    @JsonProperty
+    public void setAccessTokenSecret(String accessTokenSecret) {
+        this.accessTokenSecret = accessTokenSecret;
     }
 }
