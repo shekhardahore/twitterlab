@@ -1,5 +1,5 @@
 debug: true
-consumerKey: eUk54qSVlbvb8Ltik2lv5mVCs
-consumerSecret: HGONVYNlN5EFPzYISk4vncZNkjbm7nfuG4RvZclFLqW10JmfoG
-accessToken: 516345566-N6KuSt09YhyDcLkjXGCUlJ7fHAViDQyq5pT0NMie
-accessTokenSecret: tXO1otUjQ4jMhc4qyNDll4uNgsPQIxSgy0VegvAVmRKrg
+consumerKey: <your-consumer-key>
+consumerSecret: <your-consumer-secret>
+accessToken: <your-access-token>
+accessTokenSecret: <your-access-token-secret>
