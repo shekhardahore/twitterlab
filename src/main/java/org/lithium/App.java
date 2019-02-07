@@ -1,8 +1,10 @@
 package org.lithium;
+import org.lithium.Resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import org.eclipse.jetty.util.log.Slf4jLog;
+import org.lithium.Resources.TwitterTimelineResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Twitter;

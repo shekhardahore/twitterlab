@@ -1,7 +1,9 @@
-package org.lithium;
+package org.lithium.Resources;
 
 import com.codahale.metrics.annotation.Timed;
 import org.eclipse.jetty.util.log.Slf4jLog;
+import org.lithium.Response;
+import org.lithium.Services.TwitterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import twitter4j.Status;
@@ -9,34 +11,32 @@ import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
 import java.util.UUID;
 
-@Path("/publishTweet")
-public class TwitterPublishResource {
+
+@Path("/timeline")
+@Produces(MediaType.APPLICATION_JSON)
+public class TwitterTimelineResource {
     private Twitter twitter;
     private static Logger logger = LoggerFactory.getLogger(Slf4jLog.class);
-    public  TwitterPublishResource(Twitter twitter) {
+    public  TwitterTimelineResource(Twitter twitter) {
         this.twitter = twitter;
     }
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
     @Timed
-    public Response tweetMessage(Tweet tweet) {
-        logger.info("Publishing tweet: " + tweet);
+    public Response getTimeline() {
+        logger.info("Getting timeline");
         Response result = new Response();
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
         try {
-            Status status = twitter.updateStatus(tweet.getMessage());
-            result.setMessage("Successfully updated the status to [" + status.getText() + "].");
+            List<Status> statuses = TwitterService.getInstance().getTimeLine(twitter);
+            result.setTweets(statuses);
             result.setSuccess(Boolean.TRUE);
-            logger.info("Publishing successful");
+            logger.info("Got timeline.");
         } catch (TwitterException e) {
             logger.error(e.getMessage(), e);
             result.setMessage(e.getMessage());
