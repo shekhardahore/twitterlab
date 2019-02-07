@@ -1,11 +1,6 @@
 org/lithium/Tweet.class
 org/lithium/TwitterConfiguration.class
-org/lithium/TemplateHealthCheck.class
 org/lithium/Response.class
 org/lithium/TwitterPublishResource.class
-org/lithium/TwitterTwo.class
 org/lithium/App.class
-org/lithium/TwitterLabResource.class
 org/lithium/TwitterTimelineResource.class
-org/lithium/TwitterOne.class
-org/lithium/Saying.class

@@ -1,6 +1,9 @@
 package org.lithium;
 
 import com.codahale.metrics.annotation.Timed;
+import org.eclipse.jetty.util.log.Slf4jLog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -16,12 +19,14 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 public class TwitterTimelineResource {
     private Twitter twitter;
+    private static Logger logger = LoggerFactory.getLogger(Slf4jLog.class);
     public  TwitterTimelineResource(Twitter twitter) {
         this.twitter = twitter;
     }
     @GET
     @Timed
     public Response getTimeline() {
+        logger.info("Getting timeline");
         Response result = new Response();
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
@@ -29,7 +34,9 @@ public class TwitterTimelineResource {
             List<Status> statuses = twitter.getHomeTimeline();
             result.setTweets(statuses);
             result.setSuccess(Boolean.TRUE);
+            logger.info("Got timeline.");
         } catch (TwitterException e) {
+            logger.error(e.getMessage(), e);
             result.setMessage(e.getMessage());
             result.setSuccess(Boolean.FALSE);
         }

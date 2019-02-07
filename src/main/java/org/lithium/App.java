@@ -2,6 +2,9 @@ package org.lithium;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.eclipse.jetty.util.log.Slf4jLog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import twitter4j.Twitter;
 import twitter4j.TwitterFactory;
 import twitter4j.conf.ConfigurationBuilder;
@@ -24,6 +27,8 @@ public class App extends Application<TwitterConfiguration> {
     @Override
     public void run(TwitterConfiguration configuration,
                     Environment environment) {
+        Logger logger = LoggerFactory.getLogger(Slf4jLog.class);
+        logger.info("Server Started");
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey(configuration.getConsumerKey())
