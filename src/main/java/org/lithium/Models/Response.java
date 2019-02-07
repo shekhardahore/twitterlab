@@ -1,24 +1,36 @@
-package org.lithium;
+package org.lithium.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import twitter4j.Status;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Response {
     private String guid = null;
     private Boolean success = false;
     private String message = null;
-    private List<Status> tweets;
+    private List<TweetModel> tweets;
 
     public Response() {
 
     }
 
     @JsonProperty
-    public  List<Status> getTweets() { return tweets; }
+    public  List<TweetModel> getTweets() { return tweets; }
 
-    public void  setTweets(List<Status> tweets) { this.tweets = tweets; }
+    public void  setTweets(List<Status> tweets) {
+        List<TweetModel> tweetList = new ArrayList<>();
+
+        for (Status temp : tweets)  {
+            TweetModel tweet = new TweetModel();
+            tweet.setMessage(temp.getText());
+            tweet.setCreatedAt(temp.getCreatedAt());
+            tweet.setUser(temp.getUser());
+            tweetList.add(tweet);
+        }
+        this.tweets = tweetList;
+    }
 
     @JsonProperty
     public String getGuid() {

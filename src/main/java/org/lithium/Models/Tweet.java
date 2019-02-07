@@ -1,9 +1,10 @@
-package org.lithium;
+package org.lithium.Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Tweet {
     private String message;
+    private Double createdAt;
     /**
      * @return the message
      */
