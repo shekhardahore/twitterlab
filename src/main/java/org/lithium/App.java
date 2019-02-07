@@ -33,9 +33,9 @@ public class App extends Application<TwitterConfiguration> {
         TwitterFactory tf = new TwitterFactory(cb.build());
         Twitter twitter = tf.getInstance();
 
-        final TwitterPublishResource publishResource = new TwitterPublishResource();
+        final TwitterPublishResource publishResource = new TwitterPublishResource(twitter);
         environment.jersey().register(publishResource);
-        final TwitterTimelineResource timelineResource = new TwitterTimelineResource();
+        final TwitterTimelineResource timelineResource = new TwitterTimelineResource(twitter);
         environment.jersey().register(timelineResource);
 
     }

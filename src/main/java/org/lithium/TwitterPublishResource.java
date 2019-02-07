@@ -16,8 +16,9 @@ import java.util.UUID;
 @Path("/publishTweet")
 public class TwitterPublishResource {
 
-    public  TwitterPublishResource() {
-
+    private Twitter twitter;
+    public  TwitterPublishResource(Twitter twitter) {
+        this.twitter = twitter;
     }
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -27,8 +28,6 @@ public class TwitterPublishResource {
         Response result = new Response();
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
-
-        Twitter twitter = TwitterFactory.getSingleton();
         try {
             Status status = twitter.updateStatus(tweet.getMessage());
             result.setMessage("Successfully updated the status to [" + status.getText() + "].");

@@ -6,9 +6,9 @@ import twitter4j.Status;
 import java.util.List;
 
 public class Response {
-    private String guid;
-    private Boolean success;
-    private String message;
+    private String guid = null;
+    private Boolean success = false;
+    private String message = null;
     private List<Status> tweets;
 
     public Response() {

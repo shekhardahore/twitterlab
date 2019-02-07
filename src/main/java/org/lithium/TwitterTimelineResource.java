@@ -15,8 +15,9 @@ import java.util.UUID;
 @Path("/timeline")
 @Produces(MediaType.APPLICATION_JSON)
 public class TwitterTimelineResource {
-    public  TwitterTimelineResource() {
-
+    private Twitter twitter;
+    public  TwitterTimelineResource(Twitter twitter) {
+        this.twitter = twitter;
     }
     @GET
     @Timed
@@ -24,8 +25,6 @@ public class TwitterTimelineResource {
         Response result = new Response();
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
-
-        Twitter twitter = TwitterFactory.getSingleton();
         try {
             List<Status> statuses = twitter.getHomeTimeline();
             result.setTweets(statuses);
