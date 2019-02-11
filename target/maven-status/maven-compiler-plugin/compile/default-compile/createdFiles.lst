@@ -1,6 +1,2 @@
-org/lithium/Tweet.class
 org/lithium/TwitterConfiguration.class
-org/lithium/Response.class
-org/lithium/TwitterPublishResource.class
 org/lithium/App.class
-org/lithium/TwitterTimelineResource.class

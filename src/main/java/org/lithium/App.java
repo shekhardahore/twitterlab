@@ -44,6 +44,7 @@ public class App extends Application<TwitterConfiguration> {
         environment.jersey().register(publishResource);
         final TwitterTimelineResource timelineResource = new TwitterTimelineResource(twitter);
         environment.jersey().register(timelineResource);
-
+        final TwitterFilterResource filterResource = new TwitterFilterResource(twitter);
+        environment.jersey().register(filterResource);
     }
 }
