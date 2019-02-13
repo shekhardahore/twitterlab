@@ -7,14 +7,6 @@ import twitter4j.TwitterException;
 import java.util.List;
 
 public class TwitterService {
-    private static TwitterService single_instance = null;
-    private TwitterService() { }
-    public static TwitterService getInstance() {
-        if (single_instance == null) {
-            single_instance = new TwitterService();
-        }
-        return single_instance;
-    }
 
     public List<Status> getTimeLine(Twitter twitter) throws TwitterException {
         List<Status> statuses = twitter.getHomeTimeline();

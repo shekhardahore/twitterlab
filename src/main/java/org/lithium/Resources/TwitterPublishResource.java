@@ -7,6 +7,9 @@ import org.lithium.Services.TwitterService;
 import org.lithium.Models.Tweet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -35,7 +38,9 @@ public class TwitterPublishResource {
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
         try {
-            Status status = TwitterService.getInstance().postTweet(twitter, tweet.getMessage());
+            ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
+            TwitterService twitterService = (TwitterService) context.getBean("twitterService");
+            Status status = twitterService.postTweet(twitter, tweet.getMessage());
             result.setMessage("Successfully updated the status to [" + status.getText() + "].");
             result.setSuccess(Boolean.TRUE);
             logger.info("Publishing successful");

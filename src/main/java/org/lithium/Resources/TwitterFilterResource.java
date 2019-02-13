@@ -6,6 +6,9 @@ import org.lithium.Models.Response;
 import org.lithium.Services.TwitterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -36,7 +39,9 @@ public class TwitterFilterResource {
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
         try {
-            List<Status> statuses = TwitterService.getInstance().getTimeLine(twitter);
+            ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
+            TwitterService twitterService = (TwitterService) context.getBean("twitterService");
+            List<Status> statuses = twitterService.getTimeLine(twitter);
             final List<Status> statusStream = statuses.stream().filter(str -> str.getText().contains(filterString.get())).collect(Collectors.toList());
             result.setTweets(statusStream);
             result.setSuccess(Boolean.TRUE);

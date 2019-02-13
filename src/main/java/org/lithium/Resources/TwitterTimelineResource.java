@@ -6,6 +6,9 @@ import org.lithium.Models.Response;
 import org.lithium.Services.TwitterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -32,7 +35,9 @@ public class TwitterTimelineResource {
         result.setGuid(UUID.randomUUID().toString());
         result.setSuccess(Boolean.FALSE);
         try {
-            List<Status> statuses = TwitterService.getInstance().getTimeLine(twitter);
+            ApplicationContext context = new FileSystemXmlApplicationContext("beans.xml");
+            TwitterService twitterService = (TwitterService) context.getBean("twitterService");
+            List<Status> statuses = twitterService.getTimeLine(twitter);
             result.setTweets(statuses);
             result.setSuccess(Boolean.TRUE);
             logger.info("Got timeline.");
