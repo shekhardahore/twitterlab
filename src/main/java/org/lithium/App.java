@@ -1,4 +1,5 @@
 package org.lithium;
+import io.dropwizard.assets.AssetsBundle;
 import org.lithium.Resources.*;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -24,6 +25,7 @@ public class App extends Application<TwitterConfiguration> {
 
     @Override
     public void initialize(Bootstrap<TwitterConfiguration> bootstrap) {
+        bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html", "static"));
     }
 
     @Override

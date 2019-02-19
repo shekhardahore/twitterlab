@@ -23,7 +23,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-@Path("/api/1.0/tweet/filter")
+@Path("/tweet/filter")
 @Produces(MediaType.APPLICATION_JSON)
 public class TwitterFilterResource {
     private Twitter twitter;

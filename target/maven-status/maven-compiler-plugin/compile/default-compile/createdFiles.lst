@@ -1,2 +1,10 @@
+org/lithium/Resources/TwitterPublishResource.class
 org/lithium/TwitterConfiguration.class
+org/lithium/Models/Response.class
+org/lithium/Models/Tweet.class
+org/lithium/Models/User.class
+org/lithium/Models/TweetModel.class
 org/lithium/App.class
+org/lithium/Resources/TwitterFilterResource.class
+org/lithium/Resources/TwitterTimelineResource.class
+org/lithium/Services/TwitterService.class
