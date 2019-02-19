@@ -37,9 +37,9 @@
 
 # IntelliJ
 out/
+target/
 
 # Editor-based Rest Client
 .idea/httpRequests
 
-# Configuration Files
-twitterlab.yml
+
